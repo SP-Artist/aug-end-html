@@ -1,60 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="portfolioApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Menu</title>
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-
+<body ng-controller="MainController">
+    <!-- Header Section -->
     <header>
-        <h1>Welcome to [Restaurant Name]</h1>
-        <p>Explore our delicious menu!</p>
+        <div class="container">
+            <h1>Your Name</h1>
+            <p>GCP SQL Developer | Content Creator | Event Coordinator</p>
+            <nav>
+                <ul>
+                    <li ng-click="selectTab('about')">About</li>
+                    <li ng-click="selectTab('experience')">Experience</li>
+                    <li ng-click="selectTab('projects')">Projects</li>
+                    <li ng-click="selectTab('contact')">Contact</li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Appetizers</h2>
-        <ul>
-            <li>Garlic Bread - $4.99</li>
-            <li>Bruschetta - $6.99</li>
-            <li>Stuffed Mushrooms - $7.99</li>
-            <li>Caesar Salad - $5.99</li>
-        </ul>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- About Section -->
+            <section ng-show="isSelected('about')">
+                <h2>About Me</h2>
+                <p>{{portfolio.objective}}</p>
+            </section>
 
-    <section>
-        <h2>Main Courses</h2>
-        <ul>
-            <li>Grilled Chicken - $12.99</li>
-            <li>Spaghetti Bolognese - $14.99</li>
-            <li>Vegetable Stir-Fry - $11.99</li>
-            <li>Beef Steak - $19.99</li>
-        </ul>
-    </section>
+            <!-- Experience Section -->
+            <section ng-show="isSelected('experience')">
+                <h2>Experience</h2>
+                <div ng-repeat="job in portfolio.experience">
+                    <h3>{{job.title}} - {{job.company}}</h3>
+                    <p>{{job.duration}}</p>
+                    <ul>
+                        <li ng-repeat="task in job.tasks">{{task}}</li>
+                    </ul>
+                </div>
+            </section>
 
-    <section>
-        <h2>Desserts</h2>
-        <ul>
-            <li>Chocolate Cake - $5.99</li>
-            <li>Tiramisu - $6.99</li>
-            <li>Apple Pie - $4.99</li>
-            <li>Ice Cream Sundae - $4.99</li>
-        </ul>
-    </section>
+            <!-- Projects Section -->
+            <section ng-show="isSelected('projects')">
+                <h2>Projects & Achievements</h2>
+                <div ng-repeat="project in portfolio.projects">
+                    <h3>{{project.title}}</h3>
+                    <p>{{project.description}}</p>
+                </div>
+            </section>
 
-    <section>
-        <h2>Beverages</h2>
-        <ul>
-            <li>Coffee - $2.99</li>
-            <li>Tea - $2.49</li>
-            <li>Fresh Juice - $3.99</li>
-            <li>Soda - $1.99</li>
-        </ul>
-    </section>
+            <!-- Contact Section -->
+            <section ng-show="isSelected('contact')">
+                <h2>Contact</h2>
+                <form>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4"></textarea><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        </div>
+    </main>
 
+    <!-- Footer -->
     <footer>
-        <p>Thank you for visiting [Restaurant Name]. We hope to see you again soon!</p>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </div>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
